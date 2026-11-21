@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/jpeg" href="assets/logo-sekolah.jpg">
+<title>Rapor Kurikulum Merdeka - SD Islam Ramah Anak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app" id="appLayout">
+  <!-- DEEP NAVY LEFT SIDEBAR -->
+  <aside class="sidebar no-print" id="sidebar">
+    <div>
+      <div class="brand">
+        <div class="brand-left">
+          <div class="brand-logo"><img id="sidebarLogoImg" alt="Logo SD Islam Ramah Anak"></div>
+          <div>
+            <div class="brand-title">RAPOR KURIKULUM MERDEKA</div>
+            <div class="brand-sub"><span id="statSchoolName">SD Islam Ramah Anak</span> · <span class="dynamic-ta">TA --</span></div>
+          </div>
+        </div>
+        <div class="mobile-action-group">
+          <button class="mobile-menu" onclick="toggleMobileSidebar()" title="Menu Navigasi"><span data-icon="bars"></span></button>
+        </div>
+      </div>
+
+      <div class="nav-group-label">Menu Utama &amp; Data</div>
+      <nav class="nav" id="sidebarMainNav">
+        <button class="active" data-side-go="home" onclick="go('home')"><span data-icon="house"></span> Dashboard / Home</button>
+        <button data-side-go="DS" onclick="go('DS')"><span data-icon="school"></span> Data Sekolah (DS)</button>
+        <button data-side-go="DPD" onclick="go('DPD')"><span data-icon="users"></span> Peserta Didik (DPD)</button>
+        <button data-side-go="Absen" onclick="go('Absen')"><span data-icon="clipboard"></span> Absensi &amp; Lain-lain</button>
+        <button data-side-go="ekskul" onclick="go('ekskul')"><span data-icon="futbol"></span> Ekstrakurikuler</button>
+        <button data-side-go="kOKURIKULER" onclick="go('kOKURIKULER')"><span data-icon="people"></span> Kokurikuler (P5 / DPL)</button>
+      </nav>
+
+      <div class="nav-group-label" id="sidebarMapelLabel">Mata Pelajaran (11 Mapel)</div>
+      <nav class="nav" id="sidebarSubjectNav"></nav>
+
+      <div class="nav-group-label">Cetak &amp; Leger</div>
+      <nav class="nav">
+        <button data-side-go="rapor" onclick="go('rapor')"><span data-icon="signature"></span> Cetak Rapor</button>
+        <button data-side-go="biodata" onclick="go('biodata')"><span data-icon="idcard"></span> Biodata Peserta Didik</button>
+        <button data-side-go="legger" onclick="go('legger')"><span data-icon="table"></span> Leger Nilai</button>
+      </nav>
+    </div>
+
+    <div class="sidebar-bottom">
+      <button class="btn danger" style="width:100%;justify-content:center" onclick="clearAll()"><span data-icon="trash"></span> Kosongkan Semua Data</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar no-print">
+      <div style="display:flex;align-items:center;gap:12px">
+        <button class="btn-toggle-sidebar" onclick="toggleSidebar()" title="Sembunyikan / Tampilkan Sidebar"><span data-icon="bars"></span></button>
+        <div>
+          <div class="eyebrow">E-RAPOR KURIKULUM MERDEKA</div>
+          <h1 id="topPageTitle">Dashboard Rapor</h1>
+          <div class="subtitle" id="topPageSubtitle">Tahun Ajaran <span class="dynamic-ta">--</span> · Semester <span class="dynamic-sem">--</span> — SD Islam Ramah Anak</div>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <div id="saveStatusText" class="save-status" role="status" aria-live="polite">Data tersimpan</div>
+        <button class="btn primary" id="btnSaveRapor" onclick="saveRaporManually()" title="Simpan seluruh perubahan data rapor"><span data-icon="check"></span> Simpan Perubahan</button>
+        <button class="btn amber" onclick="clearAll()"><span data-icon="trash"></span> Reset Data</button>
+        <div class="clock">
+          <div class="clock-icon-box"><span data-icon="clock"></span><span class="clock-dot"></span></div>
+          <div class="clock-info">
+            <div class="clock-time" id="clockTime">00:00:00 WIB</div>
+            <div class="clock-date" id="clockDate"><span data-icon="calendar"></span> --</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section class="sheet active" id="sheet-home">
+        <div class="bento-top">
+          <div class="bento-card bento-hero">
+            <div>
+              <div class="bento-hero-head">
+                <span class="bento-pill"><span data-icon="check"></span> Kurikulum Merdeka · Siap Cetak A4</span>
+                <span class="bento-pill">Kelas: <strong id="homeClass">________</strong></span>
+              </div>
+              <h2>RAPOR KURIKULUM MERDEKA<br><span id="homeSchool">SDS ISLAM RAMAH ANAK</span></h2>
+              <div class="meta">Semester <span id="homeSemester">Ganjil</span> &nbsp;·&nbsp; Tahun Pelajaran <span id="homeYear">2026/2027</span></div>
+            </div>
+            <div class="bento-kpis">
+              <div class="bento-kpi">
+                <span>Kepala Sekolah</span>
+                <strong id="statKepsekName">Belum Diisi</strong>
+                <small id="statKepsekNip">NIP. -</small>
+              </div>
+              <div class="bento-kpi">
+                <span>Wali Kelas</span>
+                <strong id="statWalasName">Belum Diisi</strong>
+                <small id="statWalasNip">NIP. -</small>
+              </div>
+              <div class="bento-kpi">
+                <span>Peserta Didik</span>
+                <strong id="statStudentTotal">0 Siswa</strong>
+                <small id="statClassInfo">Kelas: Belum Diisi (Manual)</small>
+              </div>
+              <div class="bento-kpi">
+                <span>Periode Akademik</span>
+                <strong id="statTaValue">TA --</strong>
+                <small id="statSemValue">Semester --</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="bento-card bento-print-hub">
+            <div>
+              <div class="bento-card-title"><span data-icon="print" style="color:#1d4ed8"></span> Output Cetak &amp; Laporan Resmi</div>
+              <p class="hint" style="margin-bottom:12px">Pilih dokumen siap cetak ukuran A4 atau rekapitulasi nilai kelas.</p>
+            </div>
+            <div class="bento-print-list">
+              <button class="bento-print-btn" onclick="go('rapor')">
+                <div class="bento-print-left"><div class="bento-icon"><span data-icon="signature"></span></div><div><strong>Cetak Rapor Siswa</strong><span>Laporan capaian kompetensi &amp; tanda tangan</span></div></div>
+                <span style="color:#1d4ed8;font-weight:800">&rarr;</span>
+              </button>
+              <button class="bento-print-btn" onclick="go('biodata')">
+                <div class="bento-print-left"><div class="bento-icon"><span data-icon="idcard"></span></div><div><strong>Biodata Peserta Didik</strong><span>Sampul rapor, petunjuk, &amp; identitas lengkap</span></div></div>
+                <span style="color:#1d4ed8;font-weight:800">&rarr;</span>
+              </button>
+              <button class="bento-print-btn" onclick="go('legger')">
+                <div class="bento-print-left"><div class="bento-icon"><span data-icon="table"></span></div><div><strong>Leger Nilai Kelas</strong><span>Rekap nilai seluruh mapel, peringkat &amp; KKM</span></div></div>
+                <span style="color:#1d4ed8;font-weight:800">&rarr;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="bento-section-title"><span data-icon="folder" style="color:#1d4ed8"></span> Administrasi &amp; Data Pokok</div>
+        <div class="admin-strip">
+          <button class="admin-tile" onclick="go('DS')"><div class="bento-icon"><span data-icon="school"></span></div><div><strong>Data Sekolah (DS)</strong><span>Identitas, Kepsek, Wali Kelas, &amp; NIP</span></div></button>
+          <button class="admin-tile" onclick="go('DPD')"><div class="bento-icon"><span data-icon="users"></span></div><div><strong>Peserta Didik (DPD)</strong><span>30 baris biodata siswa &amp; orang tua</span></div></button>
+          <button class="admin-tile" onclick="go('Absen')"><div class="bento-icon"><span data-icon="clipboard"></span></div><div><strong>Absensi &amp; Fisik</strong><span>Kehadiran, prestasi, kesehatan, catatan</span></div></button>
+          <button class="admin-tile" onclick="go('ekskul')"><div class="bento-icon"><span data-icon="futbol"></span></div><div><strong>Ekstrakurikuler</strong><span>Nilai &amp; deskripsi kegiatan ekskul</span></div></button>
+          <button class="admin-tile" onclick="go('kOKURIKULER')"><div class="bento-icon"><span data-icon="people"></span></div><div><strong>Kokurikuler (DPL)</strong><span>8 Dimensi Profil Lulusan</span></div></button>
+        </div>
+
+        <div class="bento-section-title"><span data-icon="book" style="color:#1d4ed8"></span> <span id="homeSubjectTitleText">Muatan Mata Pelajaran</span></div>
+        <div class="subject-matrix" id="homeSubjectButtons"></div>
+      </section>
+
+      <section class="sheet" id="sheet-DS"><div class="sheet-inner"><div class="form-sheet" id="schoolForm"></div></div></section>
+      <section class="sheet" id="sheet-DPD"><div class="sheet-inner"><div class="control-strip no-print"><strong><span data-icon="users"></span> DATA PESERTA DIDIK</strong><span class="status">30 baris sesuai area input pada Excel</span></div><div class="wide-scroll"><table class="sheet-grid dpd-table" id="dpdTable"></table></div></div></section>
+      <section class="sheet" id="sheet-pai"><div class="sheet-inner" id="subject-pai"></div></section>
+      <section class="sheet" id="sheet-pp"><div class="sheet-inner" id="subject-pp"></div></section>
+      <section class="sheet" id="sheet-b.i"><div class="sheet-inner" id="subject-b.i"></div></section>
+      <section class="sheet" id="sheet-mtk"><div class="sheet-inner" id="subject-mtk"></div></section>
+      <section class="sheet" id="sheet-ipas"><div class="sheet-inner" id="subject-ipas"></div></section>
+      <section class="sheet" id="sheet-sbdp"><div class="sheet-inner" id="subject-sbdp"></div></section>
+      <section class="sheet" id="sheet-pjok"><div class="sheet-inner" id="subject-pjok"></div></section>
+      <section class="sheet" id="sheet-sunda"><div class="sheet-inner" id="subject-sunda"></div></section>
+      <section class="sheet" id="sheet-inggris"><div class="sheet-inner" id="subject-inggris"></div></section>
+      <section class="sheet" id="sheet-arab"><div class="sheet-inner" id="subject-arab"></div></section>
+      <section class="sheet" id="sheet-tik"><div class="sheet-inner" id="subject-tik"></div></section>
+      <section class="sheet" id="sheet-rapor"><div class="sheet-inner">
+        <div class="control-strip no-print"><label><span data-icon="graduate"></span> Siswa <select id="raporStudent" onchange="selectedStudent=Number(this.value);renderRapor()"></select></label><label>Kertas <select id="raporPaperSize" onchange="updateRaporPaperSize(this.value)"><option value="A4">A4 (210 × 297 mm)</option><option value="F4">F4 / Folio (215 × 330 mm)</option></select></label><label><input type="checkbox" id="showDecision" checked onchange="state.decisionVisible=this.checked;save();renderRapor()"> Tampilkan kotak keputusan pada cetak rapor</label><button class="primary" onclick="printRaporOnePage()"><span data-icon="print"></span> Cetak Rapor / PDF</button></div>
+        <div id="raporPrint"></div>
+      </div></section>
+      <section class="sheet" id="sheet-kOKURIKULER"><div class="sheet-inner" id="kokuSheet"></div></section>
+      <section class="sheet" id="sheet-ekskul"><div class="sheet-inner" id="ekskulSheet"></div></section>
+      <section class="sheet" id="sheet-Absen"><div class="sheet-inner" id="absenSheet"></div></section>
+      <section class="sheet" id="sheet-biodata"><div class="sheet-inner">
+        <div class="control-strip no-print"><label><span data-icon="graduate"></span> Siswa <select id="bioStudent" onchange="selectedStudent=Number(this.value);renderBiodata()"></select></label><button class="primary" onclick="window.print()"><span data-icon="print"></span> Cetak Biodata / PDF</button></div>
+        <div id="biodataPrint"></div>
+      </div></section>
+      <section class="sheet" id="sheet-legger"><div class="sheet-inner" id="ledgerSheet"></div></section>
+      <section class="sheet" id="sheet-Sheet1"><div class="sheet-inner" style="min-height:600px"></div></section>
+    </main>
+
+    <footer class="no-print">© <span id="footerYearText">Rapor Kurikulum Merdeka</span> — SD Islam Ramah Anak</footer>
+  </div>
+</div>
+
+<!-- TOAST & RESET MODAL FOR NEXT T.A. / FULL RESET -->
+<div class="toast-box no-print" id="appToast"><span data-icon="check" style="color:#34d399"></span><span id="appToastMsg">Data tersimpan</span></div>
+<div class="modal-backdrop no-print" id="confirmModal">
+  <div class="modal-card">
+    <h3 id="confirmModalTitle">Konfirmasi Kosongkan Data</h3>
+    <p id="confirmModalText">Apakah Anda yakin ingin mengosongkan seluruh data isian pada Tahun Ajaran aktif (<b id="nextTaPreviewLabel"></b>) ini?</p>
+    <div class="modal-actions">
+      <button class="btn secondary" onclick="closeConfirmModal()">Batal</button>
+      <button class="btn danger" id="confirmModalBtn" onclick="executeFullReset()">
+        <span data-icon="trash"></span> Ya, Kosongkan
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
